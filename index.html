@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chrono Trigger DS - Ultimate Verbose Master Checklist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            background-color: #0b0f19;
+            color: #e2e8f0;
+            font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+        }
+        /* Custom scrollbars for sidebar */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0f172a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #475569;
+        }
+        input[type="checkbox"]:checked + span {
+            text-decoration: line-through;
+            color: #64748b;
+        }
+        .sidebar-link.active {
+            background: linear-gradient(to right, #1e3a8a, #1e293b);
+            border-left: 4px solid #3b82f6;
+            color: #ffffff;
+        }
+    </style>
+</head>
+<body class="flex flex-col md:flex-row h-screen overflow-hidden">
+
+    <!-- VERTICAL SIDEBAR NAVIGATION -->
+    <aside class="w-full md:w-80 bg-slate-900 border-r border-slate-800 flex flex-col h-1/3 md:h-full z-20 shadow-2xl">
+        <!-- Sidebar Header -->
+        <div class="p-4 border-b border-slate-800 bg-slate-950/50">
+            <h1 class="text-lg font-black tracking-wide text-amber-400 flex items-center gap-2">
+                ⏳ CT Master Guide
+            </h1>
+            <p class="text-xs text-slate-400 mt-1">Granular Era-by-Era Walkthrough</p>
+            <!-- Global Progress Bar -->
+            <div class="mt-3">
+                <div class="flex justify-between text-xs text-slate-400 mb-1">
+                    <span>Overall Completion</span>
+                    <span id="global-counter">0%</span>
+                </div>
+                <div class="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                    <div id="global-progress-bar" class="bg-amber-500 h-2 transition-all duration-300" style="width: 0%"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sidebar Navigation Links List -->
+        <div id="sidebar-nav" class="flex-1 overflow-y-auto p-2 space-y-1">
+            <a href="#sec-intro" onclick="setActiveLink(this)" class="sidebar-link active block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                1. 1000 A.D. - Crono's House & Millennial Fair
+            </a>
+            <a href="#sec-trial" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                2. 1000 A.D. - Guardia Castle Trial & Escape
+            </a>
+            <a href="#sec-middle-1" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                3. 600 A.D. - Truce Canyon & Manoria Abbey
+            </a>
+            <a href="#sec-future-1" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                4. 2300 A.D. - Arris Dome & Proto Dome (Robo)
+            </a>
+            <a href="#sec-end-of-time" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                5. End of Time & Spekkio Magic Training
+            </a>
+            <a href="#sec-middle-2" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                6. 600 A.D. - Magic Cave & Hero's Grave (Masamune)
+            </a>
+            <a href="#sec-prehistoric" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                7. 65,000,000 B.C. - Prehistory & Tyranno Lair
+            </a>
+            <a href="#sec-dark-ages" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                8. 12,000 B.C. - Zeal Kingdom & Mountain of Woe
+            </a>
+            <a href="#sec-ocean-palace" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                9. 12,000 B.C. - Ocean Palace & Crono's Sacrifice
+            </a>
+            <a href="#sec-resurrection" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                10. Sidequests & Crono's Resurrection
+            </a>
+            <a href="#sec-black-omen" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                11. Black Omen & Lavos Core Confrontation
+            </a>
+            <a href="#sec-ds-extras" onclick="setActiveLink(this)" class="sidebar-link block p-2.5 rounded-lg text-xs font-semibold text-slate-300 hover:bg-slate-800/80 transition">
+                12. DS Exclusive Content (Dimensional Vortexes)
+            </a>
+        </div>
+    </aside>
+
+    <!-- MAIN CONTENT AREA -->
+    <main id="main-content-area" class="flex-1 h-full overflow-y-auto p-4 md:p-8 space-y-12">
+
+        <!-- SECTION 1 -->
+        <section id="sec-intro" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-intro">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">1. 1000 A.D. - Crono's House & Millennial Fair</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Detailed item pickups and progression steps for the opening hours of the game.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Awaken in Crono's bedroom. Check the chest in the corner for a <strong>Revive</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Go downstairs and talk to Crono's Mom to receive <strong>200G</strong> pocket money.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Exit to Leene Square. Bump into Marle and retrieve her dropped Pendant. Return it to her near the bell.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Explore Leene Square mini-games: Eat cat food for a cat follower, race Gato the robot for 15 Silver Points, and test strength with Melchior's worker.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Meet Lucca at the telepod demonstration. Volunteer Marle to step on the machine and activate it to trigger the time gate accident.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Pick up the glowing <strong>Pendant</strong> left behind by Marle. Visit Lucca's Workshop to get the <strong>Gate Key</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Navigate Truce Canyon (1000 A.D.), beat the Rollos, loot chests (<strong>Mid Ether</strong>, <strong>Ether</strong>), and jump into the portal.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 2 -->
+        <section id="sec-trial" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-trial">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">2. 1000 A.D. - Guardia Castle Trial & Escape</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Surviving the false kidnapping charges, court trial, and breaking out of Guardia Prison.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Arrive in 600 A.D., head through Leene Square, visit Cathedral/Manoria Abbey or head straight to Guardia Castle depending on routing.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Find Marle in 600 A.D., causing her timeline paradox fade-out. Meet Lucca with the Gate Key and return to 1000 A.D.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Arrive at Guardia Castle in 1000 A.D. and get arrested. Answer court questions honestly (or try to defend actions) to sway the Chancellor's verdict.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Imprisoned in Guardia Dungeon. Examine the food tray and cell walls to find a <strong>Mid Ether</strong> and trigger the guard ambush.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Escape cell, free Fritz (the guy from the fair), and loot all hidden treasure chests for <strong>Shelter</strong>, <strong>Lode Sword</strong>, and <strong>Ether</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Defeat the Dragon Tank boss atop the castle walls with Lucca and Marle. Jump off the ramparts into the river below.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 3 -->
+        <section id="sec-middle-1" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-middle-1">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">3. 600 A.D. - Truce Canyon & Manoria Abbey</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Investigating Queen Leene's disappearance in the Middle Ages and recruiting Frog.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Use the portal in Proto/Truce Canyon to enter 600 A.D. and visit Truce Village / Porre.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Visit Guardia Castle (600 A.D.), speak with the King and Chancellor, and learn Queen Leene has gone missing.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Meet Frog (Glenn) in his forest hut. He declines to join initially.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Infiltrate Manoria Abbey (Cathedral). Inspect the dropped nun's item to trigger the monster ambush and recruit Frog.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Loot Manoria Abbey thoroughly for <strong>Naga-ette Bromide</strong>, <strong>Iron Sword</strong>, <strong>Magic Ring</strong>, and <strong>Ether</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Defeat Yakra in the back chamber, rescue Queen Leene, and return to Guardia Castle.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 4 -->
+        <section id="sec-future-1" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-future-1">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">4. 2300 A.D. - Arris Dome & Proto Dome (Robo)</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Discovering the apocalyptic future, defeating Guardian, and recruiting Robo.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Enter the Future Gate and arrive at Truce Dome / Arris Dome. Discover the harsh reality of Lavos's destruction.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Navigate Arris Dome sub-basement, defeat the mutant rat, and obtain the <strong>Seed</strong> for Doan's people.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Defeat the Guardian boss in Arris Dome computer room and input password sequence (X, A, B, Y) on controller.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Cross Lab 16 bike highway, collect items, and arrive at Proto Dome.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Infiltrate the Factory, shut down conveyor belts, defeat the Punch / Conk / Kijimur bot bosses, and repair Robo (R-66Y).</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 5 -->
+        <section id="sec-end-of-time" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-end-of-time">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">5. End of Time & Spekkio Magic Training</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Meeting Gaspar, unlocking magic abilities, and exploring bucket time portals.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Travel through the time warp from Factory / Lab 30 to reach the End of Time. Meet Gaspar and the old man.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Enter the inner chamber and meet Spekkio the Master of War. Walk around the room perimeter as instructed to awaken magic in Crono, Marle, and Lucca.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Use pillars / bucket portals to jump back to 1000 A.D. (Medina Village, Melchior's Hut, etc.) to upgrade gear with Silver/Gold.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 6 -->
+        <section id="sec-middle-2" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-middle-2">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">6. 600 A.D. - Magic Cave & Hero's Grave (Masamune)</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Seeking the legendary broken sword Masamune and confronting Magus.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Visit Tata in the meadows of 600 A.D. and acquire the <strong>Hero's Medal</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Explore Denadoro Mountains, defeat Masa and Mune, and receive the broken hilt of the <strong>Masamune</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Return to 1000 A.D. Melchior's hut to learn about <strong>Dreamstone</strong>. Visit 65M B.C. to find it.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Have Melchior reforge the Masamune. Visit Fiona's shrine and Hero's Grave (Northern Ruins) in 600 A.D. to upgrade it further.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Cut open the Magic Cave barrier with the Masamune. Infiltrate Magus's Castle, defeat Flea, Slash, and Ozzie, and battle Magus.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 7 -->
+        <section id="sec-prehistoric" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-prehistoric">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">7. 65,000,000 B.C. - Prehistory & Tyranno Lair</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Recruiting Ayla, retrieving the Gate Key from Reptites, and acquiring Dreamstone.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Arrive in Prehistory via portal. Visit Ioka Hut, feast with Ayla, and win her drinking contest to get the <strong>Ruby Gun</strong>/Key clue.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Chase Kino through Forest Maze and defeat the Megasaurs to retrieve the stolen <strong>Gate Key</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Climb Dactyl Nest, befriend baby dactyls, and fly to Tyranno Lair on Mount Dactyl.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Infiltrate Tyranno Lair, drop through trap doors, defeat Nizbel II, and defeat Azala & Black Tyranno to obtain <strong>Dreamstone</strong>.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 8 -->
+        <section id="sec-dark-ages" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-dark-ages">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">8. 12,000 B.C. - Zeal Kingdom & Mountain of Woe</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Ascending to the floating kingdom of Zeal and climbing the freezing Mountain of Woe.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Use the Sky Gate in 65M B.C. (or Epoch wings later) to reach Zeal Kingdom. Meet Schala, Janus, and Dalton.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Explore Enhasa and Kajar, absorb magical energy from books, and upgrade Marle/Crono's Pendant at the Enlightened Shrine.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Climb Mount of Woe, battle Giga Gaia, rescue Melchior, and shatter the floating chains of Zeal.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 9 -->
+        <section id="sec-ocean-palace" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-ocean-palace">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">9. 12,000 B.C. - Ocean Palace & Crono's Sacrifice</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Navigating the treacherous Ocean Palace and the tragic encounter with Lavos.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Enter the Ocean Palace underwater structure. Manage energy doors and defeat turret guards.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Confront Dalton and face the three mutant bosses. Reach the Mammon Machine chamber.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Witness Lavos awaken. Crono attempts to defeat it and is tragically eradicated in the blast.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Awaken on the Beast King's / Algetty island. Obtain the flying Epoch machine from Dalton's base.</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 10 -->
+        <section id="sec-resurrection" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-resurrection">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">10. Sidequests & Crono's Resurrection</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Unlocking the Chrono Trigger (Time Egg) and completing major character sidequests.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Visit Gaspar at the End of Time to receive the <strong>Chronotigger (Time Egg)</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Complete Sidequest: Northern Ruins & Cyrus's ghost in 600 A.D. to forge the ultimate <strong>Sun Blade / Masamune</strong>.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Complete Sidequest: Sunken Desert in 600 A.D. and Sun Stone quest in 2300 A.D. / Prehistory.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Complete Sidequest: Geno Dome in 2300 A.D. to reactivate Robo and obtain <strong>Tera Mutant</strong> items.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Visit Death Peak with the Time Egg and doll clone from Norstein Bekkler's tent to resurrect Crono!</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 11 -->
+        <section id="sec-black-omen" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-black-omen">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">11. Black Omen & Lavos Core Confrontation</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Infiltrating Queen Zeal's massive floating fortress across multiple eras and facing Lavos.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Infiltrate the Black Omen in 12,000 B.C., 600 A.D., or 1000 A.D. (Clear 12,000 B.C. first for best loot scaling).</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Defeat consecutive boss tiers including Mega Mutant, Giga Mutant, Terra Mutant, and Queen Zeal.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Face the Mammon Machine and Queen Zeal fused with Lavos.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Enter Lavos Shell, defeat exterior/interior boss simulations, and battle the ultimate Lavos Core to beat the game!</span>
+                </label>
+            </div>
+        </section>
+
+        <!-- SECTION 12 -->
+        <section id="sec-ds-extras" class="bg-slate-900/60 border border-slate-800 rounded-xl p-6 shadow-xl checklist-group" data-section-id="sec-ds-extras">
+            <div class="flex justify-between items-center mb-4 border-b border-slate-800 pb-3">
+                <h2 class="text-xl font-bold text-blue-400">12. DS Exclusive Content (Dimensional Vortexes)</h2>
+                <span class="badge text-xs px-2.5 py-1 bg-slate-800 text-amber-400 rounded-full border border-slate-700 font-mono">0/0</span>
+            </div>
+            <p class="text-sm text-slate-300 mb-4">Clearing Nintendo DS exclusive end-game dungeons and battling the Time Devourer.</p>
+            <div class="space-y-3">
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">After defeating Lavos and saving your clear data, load the save and enter the <strong>Present Dimensional Vortex</strong> (1000 A.D.).</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Clear the <strong>Middle Ages Dimensional Vortex</strong> (600 A.D.) and defeat the boss to upgrade character gear.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Clear the <strong>Dark Ages Dimensional Vortex</strong> (12,000 B.C.) and collect top-tier weapons and armor.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Complete the Lost Sanctum quests across Prehistory and Middle Ages.</span>
+                </label>
+                <label class="flex items-start gap-3 p-3 rounded-lg bg-slate-950/40 border border-slate-800 hover:bg-slate-900 transition cursor-pointer">
+                    <input type="checkbox" class="mt-1 w-5 h-5 accent-blue-500 rounded cursor-pointer">
+                    <span class="text-sm text-slate-200">Confront the ultimate DS boss <strong>DreamDevourer</strong> at the Darkness Beyond Time to unlock the true secret ending.</span>
+                </label>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Script to handle interactive navigation, counts, and localStorage -->
+    <script>
+        function setActiveLink(clickedEl) {
+            document.querySelectorAll('.sidebar-link').forEach(link => link.classList.remove('active'));
+            clickedEl.classList.add('active');
+        }
+
+        function updateAllProgress() {
+            let totalCheckboxes = 0;
+            let totalChecked = 0;
+
+            document.querySelectorAll('.checklist-group').forEach(group => {
+                const checkboxes = group.querySelectorAll('input[type="checkbox"]');
+                const checked = group.querySelectorAll('input[type="checkbox"]:checked');
+                
+                totalCheckboxes += checkboxes.length;
+                totalChecked += checked.length;
+
+                const badge = group.querySelector('.badge');
+                if (badge) {
+                    badge.textContent = `${checked.length}/${checkboxes.length}`;
+                }
+            });
+
+            const globalPercent = totalCheckboxes > 0 ? Math.round((totalChecked / totalCheckboxes) * 100) : 0;
+            document.getElementById('global-counter').textContent = `${globalPercent}%`;
+            document.getElementById('global-progress-bar').style.width = `${globalPercent}%`;
+
+            saveState();
+        }
+
+        function saveState() {
+            const state = {};
+            document.querySelectorAll('input[type="checkbox"]').forEach((cb, idx) => {
+                state['cb_' + idx] = cb.checked;
+            });
+            localStorage.setItem('chrono_trigger_master_checklist_state', JSON.stringify(state));
+        }
+
+        function loadState() {
+            const saved = localStorage.getItem('chrono_trigger_master_checklist_state');
+            if (saved) {
+                const state = JSON.parse(saved);
+                document.querySelectorAll('input[type="checkbox"]').forEach((cb, idx) => {
+                    if (state['cb_' + idx] !== undefined) {
+                        cb.checked = state['cb_' + idx];
+                    }
+                });
+            }
+            updateAllProgress();
+        }
+
+        // Add event listeners to all checkboxes
+        document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+            cb.addEventListener('change', updateAllProgress);
+        });
+
+        // Initialize on window load
+        window.onload = function() {
+            loadState();
+        };
+    </script>
+</body>
+</html>
