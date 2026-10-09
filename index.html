@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Chrono Trigger DS: Missables Checklist</title>
+<style>
+:root{--bg:#12161d;--panel:#1b212b;--line:#2c3441;--tx:#e8e4d8;--mut:#98a2b3;--ac:#6cc3b5;--cap:#e5634d;--uni:#e8a33d;--evt:#b69cf0;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:150px;scroll-behavior:smooth}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--bg);border-bottom:1px solid var(--line);padding:12px 16px}
+h1{font:600 1.35rem/1.2 Georgia,"Times New Roman",serif;margin:0 0 8px}
+.bar{height:8px;background:var(--panel);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .25s}
+.ctl{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin-top:8px;font-size:.9rem;color:var(--mut)}
+button{font:inherit;color:var(--tx);background:var(--panel);border:1px solid var(--line);border-radius:6px;padding:4px 10px;cursor:pointer}
+button:hover{border-color:var(--ac)}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.wrap{display:flex;gap:24px;max-width:1100px;margin:0 auto;padding:16px}
+nav{display:none;position:sticky;top:130px;align-self:flex-start;width:250px;max-height:calc(100vh - 150px);overflow:auto;font-size:.85rem;flex:none}
+nav a{display:flex;justify-content:space-between;gap:8px;padding:3px 8px;color:var(--mut);text-decoration:none;border-left:2px solid var(--line)}
+nav a:hover{color:var(--tx);border-color:var(--ac)}nav a.done{color:var(--ac)}
+@media(min-width:900px){nav{display:block}}
+main{flex:1;min-width:0}
+details{background:var(--panel);border:1px solid var(--line);border-radius:8px;margin-bottom:12px}
+summary{cursor:pointer;padding:10px 14px;display:flex;align-items:center;gap:10px;font:600 1.05rem Georgia,serif;list-style:none}
+summary::-webkit-details-marker{display:none}
+summary::before{content:"+";color:var(--ac);width:1ch}
+details[open]>summary::before{content:"\2013"}
+summary .t{flex:1}summary .n{font:.8rem system-ui,sans-serif;color:var(--mut)}
+.warn{margin:0 14px 8px;padding:8px 12px;border-left:3px solid var(--uni);background:rgba(232,163,61,.1);font-size:.9rem}
+ul{list-style:none;margin:0;padding:0 8px 10px}
+li{margin:2px 0;border-radius:6px}
+li label{display:flex;gap:10px;padding:6px 8px;cursor:pointer;align-items:flex-start}
+li input{margin-top:5px;accent-color:var(--ac);flex:none}
+li.k{background:rgba(255,255,255,.03);border-left:3px solid var(--c)}
+li.C{--c:var(--cap)}li.U{--c:var(--uni)}li.E{--c:var(--evt)}
+li.ck span.x{text-decoration:line-through;color:var(--mut)}
+.tag{flex:none;font-size:.72rem;padding:1px 7px;border-radius:10px;border:1px solid var(--c);color:var(--c);margin-top:3px}
+.keyonly li:not(.k){display:none}
+.rs{font-size:.78rem;padding:2px 8px}
+footer{max-width:1100px;margin:0 auto;padding:0 16px 32px;color:var(--mut);font-size:.85rem}
+</style>
+</head>
+<body>
+<header>
+<h1>Chrono Trigger DS: Missables Checklist</h1>
+<div class="bar"><i id="ob"></i></div>
+<div class="ctl"><span id="ot"></span>
+<label><input type="checkbox" id="ko"> Key items only</label>
+<button id="ra">Reset all</button></div>
+</header>
+<div class="wrap"><nav id="nav" aria-label="Sections"></nav><main id="main"></main></div>
+<footer>Built from your walkthrough text. Tags: Capsule = stat capsule, Unique = gear or items you can't buy, Choice = a decision or action that affects a later event. Progress saves in this browser.</footer>
+<script>
+// Item prefixes: C = capsule, U = unique item, E = choice/timing, - = plain story step
+const S=[
+["Leene Square (1000 A.D.)","These choices decide your trial verdict later in the game.",[
+"E|Marle: talk to her BEFORE picking up her pendant",
+"E|Don't touch the pink bag on the counter (west area)",
+"E|Find the cat in the west area, talk to it, then return it to the girl in the east",
+"E|Melchior: say no when he asks you to sell the pendant",
+"E|Candy stand: when Marle stops to look, don't move until she's done",
+"U|Doppel Doll: win it at the Tent of Horrors (40-Point Game). Needed later for Death Peak",
+"-|Marle joins, Lucca's telepod sends you to 600 A.D."]],
+["Truce Canyon and Guardia Forest (600 A.D.)","",[
+"U|Power Glove: Truce Canyon chest south of the first Potion chest",
+"C|Strength Capsule: Guardia Forest, northmost sparkle (the south one is an ambush)",
+"U|Shelter: check the shaking bushes, a creature drops it"]],
+["Manolia Cathedral (600 A.D.)","",[
+"-|Beat the 4 Nagas, Frog joins",
+"E|Play the organ to open the hidden room",
+"U|Chests: Steel Saber, Maiden's Suit (Lucca), Athenian Water",
+"C|Strength Capsule: sparkle in the pot, room behind the spikes (hit the wall switch)",
+"E|Play the second organ (middle room) to reveal a room you'd otherwise miss",
+"U|Iron Sword (Frog): chest in the middle room",
+"-|Boss: Yakra. Open the chests after (frees the Chancellor, Mid-Ether)"]],
+["Guardia Castle Trial (1000 A.D.)","Waiting out the 3 days gets Lucca back. Breaking out early leaves you without her until the end.",[
+"E|Trial: say it was your fault, and say no both times to the fortune question",
+"U|Pink bag in your cell: 3 Ethers (only if found innocent)",
+"E|Wait the 3 days instead of breaking out (Lucca rescues you)",
+"E|Free Fritz from the guillotine (he rewards you later at Truce Market)",
+"U|Silver Sword and 1500G: cell below the floor hole, near the outside wall",
+"U|5 Mid-Potions: check the man on the floor before the Dragon Tank",
+"-|Boss: Dragon Tank, then run from the soldiers into Guardia Forest"]],
+["Guardia Forest (1000 A.D.)","",[
+"C|Strength Capsule: larger east/southeast area, sparkle in the upper-right corner",
+"U|Sealed chest (east area, past the exit): open after you get the Epoch"]],
+["The Future (2300 A.D.), first visit","",[
+"U|Berserker Ring: Site 16 chest north of the running rat",
+"U|Silver Bow (Marle): Site 16 alcove chest",
+"E|Arris Dome: take the Seed from the note on the dead man (give to Doan later)",
+"E|Catch the rat to learn the L + R + A secret",
+"E|Race Johnny at Site 32 with the Jetbike Key from Doan",
+"C|Strength Capsule: Death Peak, run north to the east wall indent before the wind pushes you off (retry if you fail)",
+"U|Abandoned Sewers (optional): Rage Band, Thunder Blade",
+"U|Derelict Factory chests: Bandit's Bow (Marle), Hammer Arm (Robo), Titanium Vest and Plasma Gun (Lucca), Thunder Blade",
+"-|Crane codes: Pattern 00 = X A, Pattern 01 = B B. Door password: X A B Y",
+"-|Bosses: Guardian, Krawlie, R-Series. Robo is repaired and joins"]],
+["End of Time, Medina and Heckran Cave (1000 A.D.)","",[
+"E|Spekkio: walk clockwise around his room 3 times, then fight for prizes (they depend on party level)",
+"C|Speed Capsule: Medina Elder's House, counter left of Ozzie VIII",
+"C|Magic Capsule: Medina Elder's House upstairs, sparkling counter",
+"U|Magic Scarf: Heckran Cave chest",
+"U|Sealed chest in Heckran Cave: open after you get the Epoch",
+"U|Taban's Vest: talk to Taban at Lucca's House",
+"U|10 Mid-Ethers from Fritz at Truce Market (if you freed him)",
+"-|Boss: Heckran"]],
+["Zenan Bridge and Dorino (600 A.D.)","",[
+"C|Strength Capsule: Guardia Castle kitchen, the chef gives it with the Spiced Jerky as you leave",
+"E|Give the Spiced Jerky to the Commander at Zenan Bridge for the Golden Helm",
+"-|Boss: Zombor",
+"E|Pay Toma's tab at the Dorino Inn bar",
+"U|Ambrosia: stay at the Dorino Inn (if you don't already have one)",
+"U|Fiona's Villa: 2 chests (Mid-Ethers)"]],
+["Denadoro Mountains (600 A.D.)","",[
+"U|Mirage Hand: hidden chest on the west side of the hidden northeast path",
+"U|Chests: Golden Helm (Robo), Silver Stud, Silver Earring",
+"C|Magic Capsule: talk to the white creature several times, past the bridge",
+"C|Speed Capsule: hidden sparkle west of the ladder below the save point",
+"U|Golden Suit: somewhat hidden chest to the north",
+"-|Bosses: Masa and Mune (both forms). You receive the Broken Blade"]],
+["Porre and Cursed Woods (600 A.D.)","",[
+"C|Strength Capsule: Porre Market, sparkle on the floor to the left",
+"E|Buy Toma another drink at the Porre tavern",
+"U|Hero's Badge: visit Tata at his house south of Porre",
+"U|Magic Scarf: chest in Frog's hideout, plus the Masamune piece sparkle"]],
+["Prehistory (65,000,000 B.C.)","",[
+"U|Berserker Ring: Mystic Mountains chest",
+"E|Win the soup contest against Ayla to get the red stone (Dreamstone)",
+"U|4 Potions from the guy in the east hut (before the Reptite Lair)",
+"E|Hunting Range: the rare Nu (when it rains) gives 3 of each trade item",
+"U|Reptite Lair holes. NE: Mid-Ether, Elixir, Ruby Vest. SE: Hi-Potion, Hi-Ether. SW: Mid-Ether, Hi-Potion",
+"-|Boss: Nizbel. Trade items at the trading hut for gear",
+"-|Fix the Masamune (Dreamstone to Melchior), give it to Frog, he joins"]],
+["Fiendlord's Keep (600 A.D.)","Boss gauntlet with many chests. Crono and Frog must be in the party.",[
+"U|Slasher: dropped by Slash",
+"C|Magic Capsule: sparkle on the floor after beating Flea",
+"C|Magic Capsule: lower-right corner of the trap room (after the 6 Lancers)",
+"U|Chests: Dark Mail (Frog), Death Claw (Robo), 2 Mist Robes, Speed Belt, Magic Scarf, Lapis",
+"-|Bosses: Slash, Flea, Ozzie, Magus"]],
+["Tyranno Lair (65,000,000 B.C.)","",[
+"E|Laruba Ruins: Silver Gemstone from the name-changing Nu (needed for the Frog, Robo, Ayla Triple Tech)",
+"U|Mesozoic Mail: Dactyl Nest chest",
+"E|Two-chest room: open ONLY the first (Hi-Potion). The second is a trap",
+"U|Dark warp room: Mesozoic Mail, Triceratopper, Potion, Athenian Water",
+"-|Bosses: Nizbel II, Black Tyranno"]],
+["Zeal (12,000 B.C.)","",[
+"C|Speed Capsule: Kajar, upper-right room, lower-right corner",
+"E|Kajar books in order: water (upper-left), wind (lower-right), fire (middle) for the Black Gemstone",
+"C|Speed and Magic Capsule: Enhasa hidden room, fight the Nu (optional). Books: water upper-right, wind upper-left, fire at the entrance",
+"E|Charge the pendant at the red stone in the Mammon Machine hall",
+"E|Golem: let it beat you (scripted)"]],
+["Dome Vaults (2300 A.D.)","Open the sealed doors with the charged pendant. Get the Epoch from Keeper's Dome.",[
+"C|Strength Capsule and chests: Arris Dome sealed room (Luminous Robe, Elixir, Acuity Ring, Gold Earring)",
+"U|Bangor Dome sealed room: Alluring Top, Hi-Ether, Workman's Wallet",
+"C|Magic Capsule and chests: Trann Dome sealed room (Golden Stud, Hi-Ether)",
+"-|Keeper's Dome: Wings of Time, name the Epoch"]],
+["Terra Cave and Mountain of Woe (12,000 B.C.)","",[
+"C|Strength Capsule: Terra Cave lower area, corner sparkle",
+"E|Ayla: Charm Rainbow Helms from Mudbeasts, Smiter's Blade from a Death Lily (for Frog)",
+"U|Mountain of Woe chests: Platinum Helm, Platinum Vest, Shield Spheres, Barrier Spheres, Lapis, Time Hat, Hi-Ethers",
+"E|After Giga Gaia, talk to Melchior for the Ruby Knife"]],
+["Ocean Palace (12,000 B.C.)","The Mammon Machine scene moves the story on and Zeal falls. Grab the chests first.",[
+"U|Chests: Rune Blade (Frog), Aeonian Suit, Empyrean Blade, Shockwave (Lucca), Sonic Bow (Marle), Kaiser Arm (Robo), Aeonian Helm, Elixir",
+"U|Demonslayer (Frog): hidden passage in the southeast wall of the thin-path room",
+"-|Bosses: Dalton, Golems, then Lavos"]],
+["Surviving Village and Blackbird (12,000 B.C.)","Blackbird has a last-chance prompt before the wing. Choose \"Don't care\" only when you're done.",[
+"C|Magic Capsule: behind the Nu when it leaves its room (overworld caves)",
+"E|Bring Ayla and pretend to be sick to leave the cell",
+"E|Blackbird: recover your money and each party member's gear from the chests",
+"-|Bosses: Golem Overlord, Dalton (on the Epoch)",
+"E|North Cape: say no to fighting Magus and he joins you"]],
+["Rebuilding the Timeline","",[
+"U|Chrono Trigger: talk to Gaspar at the End of Time (twice)",
+"U|Taban's Suit and Taban's Helm (Lucca): talk to Taban twice",
+"E|Silver Gemstone at Laruba Ruins, if you haven't yet",
+"E|Open every sealed chest. Contents are in your guide's Secrets section (not in this file)",
+"C|Magic Capsule: Keeper's Dome (2300 A.D.), sparkle in the inner room",
+"E|Use the Doppel Doll to start the Death Peak revival",
+"U|Death Peak chests: Magic Ring, Barrier Ring, Gigaton Arm (Robo), Brave Sword (Frog), Hadean Sickle (Magus), Yaksha Blade (Crono), Dark Helm, Memory Cap"]],
+["Before Lavos","You can back out of the Lavos fight and do side quests from the End of Time first.",[
+"-|Side quests (not covered in this file)",
+"-|Rest, save, use the bucket at the End of Time (or the Epoch) to reach 1999 A.D.",
+"-|Fight Lavos"]]
+];
+const K="ct-ds-checklist-v1",L={C:"Capsule",U:"Unique",E:"Choice"};
+let st={};try{st=JSON.parse(localStorage.getItem(K)||"{}")}catch(e){}
+const save=()=>{try{localStorage.setItem(K,JSON.stringify(st))}catch(e){}};
+const main=document.getElementById("main"),nav=document.getElementById("nav");
+const secs=S.map((s,si)=>{
+const d=document.createElement("details");d.open=true;d.id="s"+si;
+const sm=document.createElement("summary");
+sm.innerHTML='<span class="t"></span><span class="n"></span><button class="rs">Reset</button>';
+sm.querySelector(".t").textContent=s[0];d.appendChild(sm);
+if(s[1]){const w=document.createElement("div");w.className="warn";w.textContent=s[1];d.appendChild(w)}
+const ul=document.createElement("ul");
+s[2].forEach((t,ii)=>{
+const c=t[0],id=si+"-"+ii,li=document.createElement("li");
+if(c!=="-")li.className="k "+c;
+li.innerHTML='<label><input type="checkbox"><span class="x"></span></label>';
+li.querySelector(".x").textContent=t.slice(2);
+if(c!=="-"){const g=document.createElement("span");g.className="tag";g.textContent=L[c];li.querySelector("label").appendChild(g)}
+const cb=li.querySelector("input");cb.checked=!!st[id];
+cb.onchange=()=>{if(cb.checked)st[id]=1;else delete st[id];save();upd()};
+li.dataset.id=id;ul.appendChild(li)});
+d.appendChild(ul);
+sm.querySelector(".rs").onclick=e=>{e.preventDefault();e.stopPropagation();
+s[2].forEach((_,ii)=>delete st[si+"-"+ii]);save();sync();upd()};
+main.appendChild(d);
+const a=document.createElement("a");a.href="#s"+si;a.innerHTML="<span></span><span></span>";
+a.firstChild.textContent=s[0].replace(/ \(.*\)/,"");nav.appendChild(a);
+return{d,a,s,si}});
+function sync(){document.querySelectorAll("li").forEach(li=>{
+const ck=!!st[li.dataset.id];li.querySelector("input").checked=ck;li.classList.toggle("ck",ck)})}
+function upd(){let tot=0,dn=0;
+secs.forEach(o=>{let t=o.s[2].length,c=0;
+o.s[2].forEach((_,ii)=>{if(st[o.si+"-"+ii])c++});
+tot+=t;dn+=c;
+o.d.querySelector(".n").textContent=c+" / "+t;
+o.a.lastChild.textContent=c+"/"+t;o.a.classList.toggle("done",c===t);
+o.d.hidden=document.body.classList.contains("keyonly")&&!o.s[2].some(x=>x[0]!=="-")});
+document.querySelectorAll("li").forEach(li=>li.classList.toggle("ck",!!st[li.dataset.id]));
+document.getElementById("ob").style.width=(dn/tot*100)+"%";
+document.getElementById("ot").textContent=dn+" of "+tot+" done"}
+document.getElementById("ko").onchange=e=>{document.body.classList.toggle("keyonly",e.target.checked);upd()};
+document.getElementById("ra").onclick=()=>{if(confirm("Clear every checkbox?")){st={};save();sync();upd()}};
+sync();upd();
+</script>
+</body>
+</html>
